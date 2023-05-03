@@ -1,9 +1,9 @@
 package org.seguros.controller;
 
 import jakarta.validation.Valid;
-import org.seguros.business.TomadorBUS;
+import org.seguros.business.SiniestroBUS;
+import org.seguros.dto.Siniestro;
 import org.seguros.dto.Tomador;
-import org.seguros.business.TomadorBUSImp;
 import org.seguros.exception.BusException;
 import org.seguros.msg.Mensajes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,24 +20,21 @@ import java.util.Map;
 @Service
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost/80")
-public class TomadorCTRL {
-
+public class SiniestroCTRL {
     @Autowired
-    private TomadorBUS tomadorBus;
+    private SiniestroBUS siniestroBUS;
+    public SiniestroCTRL(SiniestroBUS siniestroBUS){
+        this.siniestroBUS = siniestroBUS;
 
-    public TomadorCTRL(TomadorBUS tomadorBus) {
-
-        this.tomadorBus = tomadorBus;
     }
-
     @CrossOrigin(origins = "http://localhost/80")
-    @PostMapping("/tomador/createtomador")
-    public ResponseEntity<Mensajes> create(@Valid @RequestBody Tomador tomador) throws  RuntimeException {
+    @PostMapping("/siniestro/createsiniestro")
+    public ResponseEntity<Mensajes> create(@Valid @RequestBody Siniestro siniestro) throws  RuntimeException {
         Mensajes mensajes = new Mensajes();
         try{
-            tomadorBus.createTomador(tomador);
+            siniestroBUS.createSiniestro(siniestro);
             mensajes.setCode("0");
-            mensajes.setMensaje("se creo el dato con éxito");
+            mensajes.setMensaje("se creo el siniestro con éxito");
         }catch (BusException ex){
             mensajes.setCode("1");
             mensajes.setMensaje("fallo "+ex.getMessage());
@@ -49,15 +44,15 @@ public class TomadorCTRL {
     }
 
     @CrossOrigin(origins = "http://localhost/80")
-    @GetMapping("/tomador/mostrartomador")
-    public ResponseEntity<Mensajes> getTomador() throws RuntimeException {
+    @GetMapping("/siniestro/siniestros")
+    public ResponseEntity<Mensajes> getSiniestros() throws RuntimeException {
         Mensajes mensajes = new Mensajes();
-        List<Map<String,Object>> tomador;
+        List<Map<String,Object>> siniestro;
         try {
-            tomador = tomadorBus.mostrarTomadores();
+            siniestro = siniestroBUS.mostrarSiniestros();
             mensajes.setCode("0");
-            mensajes.setMensaje("se creo el dato con éxito");
-            mensajes.setDato(tomador);
+            mensajes.setMensaje("Listado de siniestros...");
+            mensajes.setDato(siniestro);
 
         }catch (BusException ex) {
             mensajes.setCode("1");
@@ -67,13 +62,13 @@ public class TomadorCTRL {
         return ResponseEntity.ok(mensajes);
     }
 
-    @DeleteMapping("/tomador/deletetomador/{nmid}")
+    @DeleteMapping("/siniestro/deletesiniestro/{nmid}")
     public ResponseEntity<Mensajes> delete(@Valid  @PathVariable int nmid) throws RuntimeException {
         Mensajes mensajes = new Mensajes();
         try {
-            tomadorBus.eleiminarTomador(nmid);
+            siniestroBUS.eleiminarSiniestros(nmid);
             mensajes.setCode("0");
-            mensajes.setMensaje("Tomador eleiminado");
+            mensajes.setMensaje("Siniestro eliminado exitosamente!");
         }catch (BusException e){
             mensajes.setCode("1");
             mensajes.setMensaje("fallo " + e.getMessage());
