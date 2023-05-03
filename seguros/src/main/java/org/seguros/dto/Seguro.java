@@ -9,7 +9,25 @@ public class Seguro {
     private String descripcion;
     private Date f_inicial;
     private Date f_final;
-    private Tomador tomador;
+
+    private Tomador  tomador;
+
+    public Tomador getTomador() {
+        return tomador;
+    }
+
+    public void settomador(Tomador tomador) {
+        this.tomador = tomador;
+    }
+
+    public Reaseguradora getReaseguradora() {
+        return reaseguradora;
+    }
+
+    public void setreaseguradora(Reaseguradora reaseguradora) {
+        this.reaseguradora = reaseguradora;
+    }
+
     private Reaseguradora reaseguradora;
 
     public int getNmid() {
@@ -60,19 +78,5 @@ public class Seguro {
         this.f_final = f_final;
     }
 
-    public Tomador getTomador() {
-        return tomador;
-    }
 
-    public void setTomador(Tomador tomador) {
-        this.tomador = tomador;
-    }
-
-    public Reaseguradora getReaseguradora() {
-        return reaseguradora;
-    }
-
-    public void setReaseguradora(Reaseguradora reaseguradora) {
-        this.reaseguradora = reaseguradora;
-    }
 }
