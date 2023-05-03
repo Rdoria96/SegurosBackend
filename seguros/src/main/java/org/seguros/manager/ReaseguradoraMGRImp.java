@@ -4,10 +4,11 @@ import org.seguros.dao.ReaseguradoraDAO;
 import org.seguros.dto.Reaseguradora;
 import org.seguros.exception.DaoException;
 import org.seguros.exception.MgrException;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
-
+@Component
 public class ReaseguradoraMGRImp implements ReaseguradoraMGR {
 
     private ReaseguradoraDAO reaseguradoraDAO;

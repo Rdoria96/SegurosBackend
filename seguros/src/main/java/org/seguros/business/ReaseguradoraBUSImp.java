@@ -6,15 +6,19 @@ import org.seguros.exception.BusException;
 import org.seguros.exception.MgrException;
 import org.seguros.manager.ReaseguradoraMGR;
 import org.seguros.manager.TomadorMGR;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
+@Transactional
 public class ReaseguradoraBUSImp implements ReaseguradoraBUS {
 
     private ReaseguradoraMGR reaseguradoraMGR;
 
-    public ReaseguradoraBUSImp(ReaseguradoraMGR reaseguradoraMGR) {
+    public ReaseguradoraBUSImp(ReaseguradoraMGR reaseguradoraMGR)
+    {
         this.reaseguradoraMGR = reaseguradoraMGR;
     }
 

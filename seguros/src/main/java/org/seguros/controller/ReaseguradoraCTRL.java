@@ -2,9 +2,7 @@ package org.seguros.controller;
 
 import jakarta.validation.Valid;
 import org.seguros.business.ReaseguradoraBUS;
-import org.seguros.business.TomadorBUS;
 import org.seguros.dto.Reaseguradora;
-import org.seguros.dto.Tomador;
 import org.seguros.exception.BusException;
 import org.seguros.msg.Mensajes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +14,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-
+@Service
+@RestController
+@Transactional
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost/80")
 public class ReaseguradoraCTRL {
 
 
-
+@Autowired
     private ReaseguradoraBUS reaseguradoraBUS;
 
     public ReaseguradoraCTRL(ReaseguradoraBUS reaseguradoraBUS) {
         this.reaseguradoraBUS = reaseguradoraBUS;
     }
+
 
     @CrossOrigin(origins = "http://localhost/80")
     @PostMapping("/reaseguradora/createreaseguradora")
@@ -62,7 +65,7 @@ public class ReaseguradoraCTRL {
         return ResponseEntity.ok(mensajes);
     }
 
-    @DeleteMapping("/tomador/deletetomador/{nmid}")
+    @DeleteMapping("/reaseguradora/deletereaseguradora/{nmid}")
     public ResponseEntity<Mensajes> delete(@Valid  @PathVariable int nmid) throws RuntimeException {
         Mensajes mensajes = new Mensajes();
         try {

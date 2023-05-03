@@ -7,11 +7,12 @@ import org.seguros.mapper.ReaseguradoraMapper;
 import org.seguros.mapper.TomadorMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public class ReaseguradoraDAOImp  implements  ReaseguradoraDAO{
 
     private JdbcTemplate jdbcTemplate;
@@ -23,7 +24,7 @@ public class ReaseguradoraDAOImp  implements  ReaseguradoraDAO{
     public void insert(Reaseguradora reaseguradora) throws DaoException {
         String insert = "INSERT INTO reaseguradora(\n" +
                 "\tnit, razon_social, monto_seguro, porcentaje_cober)\n" +
-                "\tVALUES (?, ?, ?, ?, ?);";
+                "\tVALUES (?, ?, ?, ?);";
         jdbcTemplate.update(insert,
                 reaseguradora.getNit(),
                 reaseguradora.getRazon_social(),
