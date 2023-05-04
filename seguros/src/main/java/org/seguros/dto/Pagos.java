@@ -1,5 +1,6 @@
 package org.seguros.dto;
 
+import java.time.DateTimeException;
 import java.util.Date;
 
 public class Pagos  {
