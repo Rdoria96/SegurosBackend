@@ -33,9 +33,9 @@ public class SegurosDAOImp implements SegurosDAO{
             "\tFROM public.seguro WHERE nmid=?";
 
     private static  final  String SELECT = "SELECT s.nmid,s.tipo_seguro, s.valor, s.descripcion,\n" +
-            "s.f_inicial,s.f_final, s.nmid, r.nmid \n" +
-            "FROM seguro s INNER JOIN tomador t ON  s.nmid_tomador = t.nmid\n" +
-            "INNER JOIN reaseguradora r ON s.nmid_reaseguradora = r.nmid";
+            "            s.f_inicial,s.f_final, t.documento, r.razon_social \n" +
+            "            FROM seguro s INNER JOIN tomador t ON  s.nmid_tomador = t.nmid\n" +
+            "            INNER JOIN reaseguradora r ON s.nmid_reaseguradora = r.nmid";
 
 
     public void insert(Seguro seguro) throws DaoException{

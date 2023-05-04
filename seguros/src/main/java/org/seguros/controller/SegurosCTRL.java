@@ -27,7 +27,7 @@ public class SegurosCTRL {
    public SegurosCTRL(SegurosBUS segurosBUS){
        this.segurosBUS= segurosBUS;
    }
-    @CrossOrigin(origins = "http://localhost/80")
+    @CrossOrigin(origins = "http://localhost/4200")
     @PostMapping("/seguros")
     public ResponseEntity<Mensajes> create(@Valid @RequestBody Seguro seguro) throws  RuntimeException {
         Mensajes mensajes = new Mensajes();
@@ -43,9 +43,9 @@ public class SegurosCTRL {
         return ResponseEntity.ok( mensajes);
     }
 
-    @CrossOrigin(origins = "http://localhost/80")
+    @CrossOrigin(origins = "http://localhost/4200")
     @GetMapping("/seguros/mostrar_seguros")
-    public ResponseEntity<Mensajes> getTomador() throws RuntimeException {
+    public ResponseEntity<Mensajes> getSeguros() throws RuntimeException {
         Mensajes mensajes = new Mensajes();
         List<Map<String,Object>> Seguros;
         try {

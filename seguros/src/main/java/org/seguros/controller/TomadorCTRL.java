@@ -47,7 +47,6 @@ public class TomadorCTRL {
         return ResponseEntity.ok( mensajes);
     }
 
-    @CrossOrigin(origins = "http://localhost/80")
     @GetMapping("/tomador/mostrartomador")
     public ResponseEntity<Mensajes> getTomador() throws RuntimeException {
         Mensajes mensajes = new Mensajes();

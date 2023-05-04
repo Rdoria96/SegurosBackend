@@ -4,12 +4,13 @@ import org.seguros.dao.SegurosDAO;
 import org.seguros.dto.Seguro;
 import org.seguros.exception.DaoException;
 import org.seguros.exception.MgrException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-@Repository
+@Component
 public class SegurosMGRImp implements SegurosMGR{
 
     private SegurosDAO segurosDAO;
