@@ -50,12 +50,13 @@ public class SiniestroDAOImp implements SiniestroDAO {
         }
     }
     public Siniestro getById(int nmid) throws DaoException {
-        String SELECTBYID = "SELECT tipo_siniestro,\n" +
-                "\t f_siniestro, \n" +
-                "\t lugar,\n" +
-                "\t nmid_tomador\n"+
-                "FROM public.siniestro \n" +
-                "\t WHERE nmid = ?";
+        String SELECTBYID = "SELECT \n" +
+                "s.nmid, \n" +
+                "s.tipo_siniestro, \n" +
+                "s.f_siniestro, \n" +
+                "s.lugar, \n" +
+                "s.nmid_tomador \n" +
+                "FROM public.siniestro s WHERE s.nmid = ? ";
         Siniestro siniestro = null;
         try {
             siniestro = jdbcTemplate.queryForObject(SELECTBYID, new Object[]{nmid}, new SiniestroMapper());
@@ -66,23 +67,21 @@ public class SiniestroDAOImp implements SiniestroDAO {
     }
     public List<Map<String, Object>> getAll() throws DaoException {
         String SELECT = "SELECT \n" +
-                "\tS.nmid, \n" +
-                "\tS.tipo_siniestro,\n" +
-                "\tS.f_siniestro, \n" +
-                "\tS.lugar,\n" +
-                "\tT.nmid AS id_tomador,\n" +
-                "    \tT.documento,\n" +
-                "    \tT.tipo_doc,\n" +
-                "    \tT.nombre,\n" +
-                "    \tT.apellido,\n" +
-                "    \tT.direccion,\n" +
-                "    \tT.telefono,\n" +
-                "    \tT.ocupacion,\n" +
-                "    \tT.correo,\n" +
-                "    \tT.f_naci\n" +
-                "FROM siniestro S\n" +
-                "    INNER JOIN tomador T\n" +
-                "    ON S.nmid_tomador = T.nmid;";
+                "s.nmid, \n" +
+                "s.tipo_siniestro, \n" +
+                "s.f_siniestro, \n" +
+                "s.lugar,\n" +
+                "t.nmid as nmid_tomador,\n" +
+                "t.documento,\n" +
+                "t.tipo_doc,\n" +
+                "t.nombre,\n" +
+                "t.apellido,\n" +
+                "t.direccion,\n" +
+                "t.telefono,\n" +
+                "t.ocupacion,\n" +
+                "t.correo,\n" +
+                "t.f_naci\n" +
+                "FROM siniestro s inner join tomador t on s.nmid_tomador = t.nmid ORDER BY s.nmid DESC";
         List<Map<String,Object>> listSiniestro;
         try {
             listSiniestro = jdbcTemplate.queryForList(SELECT);
