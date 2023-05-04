@@ -1,9 +1,8 @@
 package org.seguros.controller;
 
 import jakarta.validation.Valid;
-import org.seguros.business.TomadorBUS;
-import org.seguros.dto.Tomador;
-import org.seguros.business.TomadorBUSImp;
+import org.seguros.business.ReaseguradoraBUS;
+import org.seguros.dto.Reaseguradora;
 import org.seguros.exception.BusException;
 import org.seguros.msg.Mensajes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,34 +11,33 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 @RestController
 @Transactional
-@Service
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost/80")
-public class TomadorCTRL {
+public class ReaseguradoraCTRL {
 
-    @Autowired
-    private TomadorBUS tomadorBus;
 
-    public TomadorCTRL(TomadorBUS tomadorBus) {
+@Autowired
+    private ReaseguradoraBUS reaseguradoraBUS;
 
-        this.tomadorBus = tomadorBus;
+    public ReaseguradoraCTRL(ReaseguradoraBUS reaseguradoraBUS) {
+        this.reaseguradoraBUS = reaseguradoraBUS;
     }
 
+
     @CrossOrigin(origins = "http://localhost/80")
-    @PostMapping("/tomador/createtomador")
-    public ResponseEntity<Mensajes> create(@Valid @RequestBody Tomador tomador) throws  RuntimeException {
+    @PostMapping("/reaseguradora/createreaseguradora")
+    public ResponseEntity<Mensajes> create(@Valid @RequestBody Reaseguradora reaseguradora) throws  RuntimeException {
         Mensajes mensajes = new Mensajes();
         try{
-            tomadorBus.createTomador(tomador);
+            reaseguradoraBUS.createReaseguradora(reaseguradora);
             mensajes.setCode("0");
-            mensajes.setMensaje("se creo el dato con éxito");
+            mensajes.setMensaje("Reaseguradora registrada con éxito");
         }catch (BusException ex){
             mensajes.setCode("1");
             mensajes.setMensaje("fallo "+ex.getMessage());
@@ -48,15 +46,16 @@ public class TomadorCTRL {
         return ResponseEntity.ok( mensajes);
     }
 
-    @GetMapping("/tomador/mostrartomador")
-    public ResponseEntity<Mensajes> getTomador() throws RuntimeException {
+    @CrossOrigin(origins = "http://localhost/80")
+    @GetMapping("/reaseguradora/mostrarreaseguradora")
+    public ResponseEntity<Mensajes> getReaseguradora() throws RuntimeException {
         Mensajes mensajes = new Mensajes();
-        List<Map<String,Object>> tomador;
+        List<Map<String,Object>> reaseguradora;
         try {
-            tomador = tomadorBus.mostrarTomadores();
+            reaseguradora = reaseguradoraBUS.mostrarReaseguradoras();
             mensajes.setCode("0");
-            mensajes.setMensaje("se creo el dato con éxito");
-            mensajes.setDato(tomador);
+            mensajes.setMensaje("Se mostro la reaseguradora con exito");
+            mensajes.setDato(reaseguradora);
 
         }catch (BusException ex) {
             mensajes.setCode("1");
@@ -66,13 +65,13 @@ public class TomadorCTRL {
         return ResponseEntity.ok(mensajes);
     }
 
-    @DeleteMapping("/tomador/deletetomador/{nmid}")
+    @DeleteMapping("/reaseguradora/deletereaseguradora/{nmid}")
     public ResponseEntity<Mensajes> delete(@Valid  @PathVariable int nmid) throws RuntimeException {
         Mensajes mensajes = new Mensajes();
         try {
-            tomadorBus.eleiminarTomador(nmid);
+            reaseguradoraBUS.eleiminarReaseguradora(nmid);
             mensajes.setCode("0");
-            mensajes.setMensaje("Tomador eleiminado");
+            mensajes.setMensaje("Reaseguradora eleiminada con exito");
         }catch (BusException e){
             mensajes.setCode("1");
             mensajes.setMensaje("fallo " + e.getMessage());

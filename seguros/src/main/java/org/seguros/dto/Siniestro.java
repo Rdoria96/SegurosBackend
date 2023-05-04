@@ -9,6 +9,14 @@ public class Siniestro {
     private String lugar;
     private Tomador tomador;
 
+    public Tomador getTomador() {
+        return tomador;
+    }
+
+    public void setTomador(Tomador tomador) {
+        this.tomador = tomador;
+    }
+
     public int getNmid() {
         return nmid;
     }
@@ -41,11 +49,5 @@ public class Siniestro {
         this.lugar = lugar;
     }
 
-    public Tomador getTomador() {
-        return tomador;
-    }
 
-    public void setTomador(Tomador tomador) {
-        this.tomador = tomador;
-    }
 }
