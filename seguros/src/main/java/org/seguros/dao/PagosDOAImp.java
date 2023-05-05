@@ -79,7 +79,9 @@ public class PagosDOAImp implements PagosDAO{
     }
 
     public List<Map<String, Object>> getByYearMont(int año, int mes, String documento) throws DaoException {
-        String sql = "SELECT P.f_pago, P.cuotas, P.valor_cmes, P.nmid_seguro, T.nmid \n" +
+        String sql = "SELECT CONCAT(T.tipo_doc,' - ',T.documento) AS documento,\n" +
+                "CONCAT(T.nombre,' ',T.apellido) AS nombretom,\n" +
+                "P.nmid, P.f_pago, P.cuotas, P.valor_cmes, P.nmid_seguro \n" +
                 "FROM pagos \n" +
                 "P INNER JOIN seguro S \n" +
                 "ON P.nmid_seguro = S.nmid \n" +

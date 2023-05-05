@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +32,18 @@ public class PagosCTRL {
     }
 
 
-    @PostMapping("/pagos/generate/{documento},{fecha}")
-    public ResponseEntity<Mensajes> generate(@PathVariable String documento, @PathVariable Date fecha) throws  RuntimeException{
+    @CrossOrigin(origins = "http://localhost/80")
+    @PostMapping("/pagos/generate")
+    public ResponseEntity<Mensajes> generate(@RequestBody Map<String, Object> request) throws  RuntimeException{
         Mensajes mensajes = new Mensajes();
+
+        String documento = (String) request.get("documento");
+        String fechaStr = (String) request.get("fecha");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha;
+
         try {
+            fecha = new Date(format.parse(fechaStr).getTime());
             pagosBUS.generatePagos(documento,fecha);
             mensajes.setCode("0");
             mensajes.setMensaje("se creo el dato con éxito");
@@ -41,6 +51,8 @@ public class PagosCTRL {
             mensajes.setCode("1");
             mensajes.setMensaje("fallo "+ex.getMessage());
             throw new RuntimeException(ex);
+        }catch (ParseException e) {
+            throw new RuntimeException("Error al parsear fecha: " + fechaStr, e);
         }
         return ResponseEntity.ok( mensajes);
     }
@@ -74,10 +86,12 @@ public class PagosCTRL {
             System.out.println("ctrl "+pagos);
             mensaje.setDato(pagos);
         }catch (BusException ex){
+            ex.printStackTrace();
             mensaje.setCode("1");
             mensaje.setMensaje("fallo " + ex.getMessage());
             ex.printStackTrace();
             throw new RuntimeException(ex);
+
         }
         return ResponseEntity.ok( mensaje);
     }
