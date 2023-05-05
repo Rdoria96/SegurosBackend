@@ -16,27 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@Transactional
-@Service
-@RequestMapping("/api")
-@CrossOrigin(origins = "http://lopackage org.seguros.controller;
-
-import jakarta.validation.Valid;
-import org.seguros.business.BeneficiarioBUS;
-import org.seguros.business.TomadorBUS;
-import org.seguros.dto.Beneficiario;
-import org.seguros.dto.Tomador;
-import org.seguros.exception.BusException;
-import org.seguros.msg.Mensajes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @Transactional

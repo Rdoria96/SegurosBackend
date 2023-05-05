@@ -8,21 +8,7 @@ import org.springframework.stereotype.Service;
 import org.seguros.exception.MgrException;
 import java.util.List;
 import java.util.Map;
-@Component
-@Service
-public class BeneficiarioMGRImp implements BeneficiarioMGR {
-    private BeneficiarioDAO beneficiarioDAO;
 
-    private BeneficiarioMGRImp(BeneficiarioDAO package org.seguros.manager;
-
-import org.seguros.dao.BeneficiarioDAO;
-import org.seguros.dto.Beneficiario;
-import org.seguros.exception.DaoException;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.seguros.exception.MgrException;
-import java.util.List;
-import java.util.Map;
 @Component
 @Service
 public class BeneficiarioMGRImp implements BeneficiarioMGR {

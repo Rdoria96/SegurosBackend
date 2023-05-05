@@ -15,23 +15,6 @@ import java.time.chrono.JapaneseDate;
 import java.util.List;
 import java.util.Map;
 
-@Repository
-public class BeneficiarioDAOImp implempackage org.seguros.dao;
-
-import org.seguros.dto.Beneficiario;
-import org.seguros.dto.Tomador;
-import org.seguros.mapper.BeneficiarioMapper;
-import org.seguros.mapper.TomadorMapper;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.seguros.exception.DaoException;
-import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.time.chrono.JapaneseDate;
-import java.util.List;
-import java.util.Map;
 
 @Repository
 public class BeneficiarioDAOImp implements BeneficiarioDAO{
