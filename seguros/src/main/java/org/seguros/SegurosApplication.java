@@ -23,4 +23,6 @@ public class SegurosApplication {
 		return registrationBean;
 	}
 
+
+
 }
